@@ -1,16 +1,34 @@
-rem echo off
+                
 
-set groupName=hj_ftp_group
-set groupComment=test
+Set groupName=hj_ftp_group
+Set groupComment=test
+                                                                                        
+net localgroup | find /i "%groupName%" > tmp
+Set /P res= < tmp
+Del  tmp
 
-net localgroup | find /i "%groupName%" > nul && goto End
-
-pause
-
+If "%res%" EQU "*%groupName%" (
+Echo "Le groupe [%groupName%] existe deja. Il sera supprime et recree"
+Pause 
+Goto DeleteGroupAndRecreateIt
+) Else (
+Goto CreateGroup
+)
+Pause
+Exit                
+                                                         
+:CreateGroup
 net localgroup %groupName% /comment:%groupComment% /add
-
-:End
-echo "Le groupe [%groupName%] existe déjà. Opération interrompue."
-exit
-
-pause
+Echo "Le groupe [%groupName%] a ete ajoute avec succes. Operation terminee."
+Pause
+Exit 
+                                                                                                                                                                     
+:DeleteGroupAndRecreateIt
+net localgroup %groupName% /Delete
+Echo "Le groupe [%groupName%] a ete supprime."
+Pause
+Goto CreateGroup
+Pause
+Exit   
+                                                                                   
+                                                                                
