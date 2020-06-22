@@ -1,6 +1,6 @@
 # ftp-user-creator
 
-Create ftp user on windows in CLI
+Create ftp user on windows in CLI with restriction. Every user have only access to his specific folder.
 
 # Usage
 
