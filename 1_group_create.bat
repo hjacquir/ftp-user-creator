@@ -2,11 +2,12 @@
 
 Set groupName=hj_ftp_group
 Set groupComment=test
-                                                                                        
+
+:: find the current group                                                                                       
 net localgroup | find /i "%groupName%" > tmp
 Set /P res= < tmp
 Del  tmp
-
+:: check if current group already exist
 If "%res%" EQU "*%groupName%" (
 Echo "Le groupe [%groupName%] existe deja. Il sera supprime et recree"
 Pause 
